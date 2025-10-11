@@ -23,7 +23,7 @@ public class Main {
 					int calories = 0;
 					double protein = 0;
 					
-					System.out.println("Enter 1 to add new food object, 2 to look up food, or 3 to show all foods ");
+					System.out.println("Enter 1 to add new food object, 2 to look up food, 3 to show all foods, or 4 to go back. ");
 					String userResponse2 = scanner.nextLine();
 					
 					if (userResponse2.equals("1")) { //add new food to database 
@@ -73,6 +73,9 @@ public class Main {
 			                System.out.println("Food: " + entry.getKey() + ", Value: " + entry.getValue());
 			            }
 					}
+					else if (userResponse2.equals("4")) { //return to first menu
+						break;
+					}
 				}
 			
 			}
@@ -80,15 +83,30 @@ public class Main {
 				System.out.print("Enter the name of what you ate: (Type done when finished.) ");
 				String foodName = scanner.nextLine();
 				if (foodName.equalsIgnoreCase("done")) break;
-				
-				System.out.print("Enter the calorie count: ");
-				int calories = Integer.parseInt(scanner.nextLine());
-				
-				System.out.print("Enter protein amount in grams: ");
-				double protein = Double.parseDouble(scanner.nextLine());
-				
-				Food food = new Food (foodName, calories, protein);
-				dailyLog.add(food);
+				else if(foodDatabase.containsKey(foodName.toLowerCase())) {
+					System.out.println("This food is already in the database, added to your daily log.");
+					Food existingFood = foodDatabase.get(foodName.toLowerCase());
+					dailyLog.add(existingFood);
+				}
+				else {
+					System.out.print("Enter the calorie count: ");
+					int calories = Integer.parseInt(scanner.nextLine());
+					
+					System.out.print("Enter protein amount in grams: ");
+					double protein = Double.parseDouble(scanner.nextLine());
+					
+					Food food = new Food (foodName, calories, protein);
+					dailyLog.add(food);
+					
+					System.out.println("Do you want to save this food for next time? Y/N");
+					String saveConfirm = scanner.nextLine();
+					if (saveConfirm.equalsIgnoreCase("Y")) {
+						foodDatabase.put(foodName.toLowerCase(), food);
+					}
+					else if (saveConfirm.equalsIgnoreCase("N")) {
+						continue;
+					}
+				}	
 			}
 			else {
 				
