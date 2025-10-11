@@ -35,6 +35,10 @@ public class Main {
 						System.out.println("What are the calories for this food? Or type 'back' to go back. ");
 						String checkForBack = scanner.nextLine();
 						if (checkForBack.equalsIgnoreCase("back")) break;
+						else if(!checkForBack.matches("\\d+")) {
+							System.out.println("Invalid input. Please enter a valid number.");
+							continue; 
+						}
 						else {
 							calories = Integer.parseInt(checkForBack);
 						}
@@ -42,6 +46,10 @@ public class Main {
 						System.out.println("What is the protein content of this food in grams? Or type 'back' to go back. ");
 						String checkForBack2 = scanner.nextLine();
 						if (checkForBack2.equalsIgnoreCase("back")) break;
+						else if(!checkForBack2.matches("\\d+(\\.\\d+)?")) {
+							System.out.println("Invalid input. Please enter a valid number.");
+							continue; 
+						}
 						else {
 							protein = Double.parseDouble(checkForBack2);
 						}
