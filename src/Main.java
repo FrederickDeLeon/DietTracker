@@ -47,12 +47,12 @@ public class Main {
 						}
 						
 						Food food = new Food (newFoodEntry, calories, protein);
-						foodDatabase.put(newFoodEntry, food);
+						foodDatabase.put(newFoodEntry.toLowerCase(), food);
 					}
 					else if (userResponse2.equals("2")) { //look up foods in database 
 						System.out.println("What food are you trying to look up? ");
 						String lookUpEntry = scanner.nextLine();
-						Food foundFood = foodDatabase.get(lookUpEntry);
+						Food foundFood = foodDatabase.get(lookUpEntry.toLowerCase());
 						if (foundFood != null) {
 						    System.out.println(foundFood);
 						} 
