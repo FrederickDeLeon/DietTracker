@@ -12,7 +12,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("___ Diet Tracker ___");
+		System.out.println("╔════════════════════════╗");
+		System.out.println("║     DIET TRACKER       ║");
+		System.out.println("╚════════════════════════╝");
 		loadDatabase();
 		
 		boolean running = true;
@@ -34,17 +36,26 @@ public class Main {
 	// Menu Methods
 	
 	private static int mainMenu() {
-		System.out.println("Enter 1 to access food database, 2 to add new entries to daily log, or 3 to exit. ");
+		System.out.println("╔════════════════════════╗");
+		System.out.println("║     DIET TRACKER       ║");
+		System.out.println("╠════════════════════════╣");
+		System.out.println("║ 1. Food Database       ║");
+		System.out.println("║ 2. Daily Log           ║");
+		System.out.println("║ 3. Exit                ║");
+		System.out.println("╚════════════════════════╝");
 		return Integer.parseInt(scanner.nextLine());
 	}
 	
 	private static void foodDatabaseMenu() {
 		while (true) {
-            System.out.println("\n1. Add new food");
-            System.out.println("2. Look up food");
-            System.out.println("3. Show all foods");
-            System.out.println("4. Clear database");
-            System.out.println("5. Go back");
+			
+			System.out.println("╔════════════════════════╗");
+			System.out.println("║ 1. Add new food        ║");
+			System.out.println("║ 2. Look up food        ║");
+			System.out.println("║ 3. Show all foods      ║");
+			System.out.println("║ 4. Clear database      ║");
+			System.out.println("║ 5. Go back             ║");
+			System.out.println("╚════════════════════════╝");
             String response = scanner.nextLine();
 
             switch (response) {
