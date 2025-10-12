@@ -1,17 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.io.*;
 
 public class Main {
 	
 	private static final Scanner scanner = new Scanner(System.in);
     private static final HashMap<String, Food> foodDatabase = new HashMap<>();
     private static final ArrayList<Food> dailyLog = new ArrayList<>();
+    private static final String DATABASE_FILE = "food_database.txt";
 
 	public static void main(String[] args) {
 		
 		System.out.println("___ Diet Tracker ___");
+		loadDatabase();
 		
 		boolean running = true;
         while (running) {
@@ -23,6 +25,7 @@ public class Main {
             }
         }
         
+        saveDatabase();
         scanner.close();
         showDailySummary();
         
@@ -40,14 +43,16 @@ public class Main {
             System.out.println("\n1. Add new food");
             System.out.println("2. Look up food");
             System.out.println("3. Show all foods");
-            System.out.println("4. Go back");
+            System.out.println("4. Clear database");
+            System.out.println("5. Go back");
             String response = scanner.nextLine();
 
             switch (response) {
                 case "1" -> addFoodToDatabase();
                 case "2" -> lookupFood();
                 case "3" -> showAllFoods();
-                case "4" -> { return; }
+                case "4" -> clearDatabase();
+                case "5" -> { return; }
                 default -> System.out.println("Invalid choice.");
             }
         }
@@ -155,6 +160,68 @@ public class Main {
 	        System.out.printf("Total Fat: %d g%n", totalFat);
 	        System.out.printf("Total Carbs: %d g%n", totalCarbs);
 	        System.out.printf("Total Sodium: %d mg%n", totalSodium);
+	    }
+	    
+	    private static void saveDatabase() {
+	    	try (PrintWriter writer = new PrintWriter(new FileWriter(DATABASE_FILE))) {
+	            for (Food food : foodDatabase.values()) {
+	                writer.printf("%s,%d,%.2f,%d,%d,%d%n",
+	                    food.foodName.replace(",", ""), 
+	                    food.calories,
+	                    food.protein,
+	                    food.fat,
+	                    food.carbs,
+	                    food.sodium
+	                );
+	            }
+	            System.out.println("Database saved successfully.");
+	        } catch (IOException e) {
+	            System.out.println("Error saving database: " + e.getMessage());
+	        }
+	    }
+	    
+	    private static void loadDatabase() {
+	    	File file = new File(DATABASE_FILE);
+	        if (!file.exists()) return;
+
+	        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+	            String line;
+	            while ((line = reader.readLine()) != null) {
+	                String[] parts = line.split(",");
+	                if (parts.length == 6) {
+	                    String name = parts[0];
+	                    int calories = Integer.parseInt(parts[1]);
+	                    double protein = Double.parseDouble(parts[2]);
+	                    int fat = Integer.parseInt(parts[3]);
+	                    int carbs = Integer.parseInt(parts[4]);
+	                    int sodium = Integer.parseInt(parts[5]);
+	                    foodDatabase.put(name.toLowerCase(), new Food(name, calories, protein, fat, carbs, sodium));
+	                }
+	            }
+	            System.out.println("Database loaded successfully.");
+	        } catch (IOException e) {
+	            System.out.println("Error loading database: " + e.getMessage());
+	        }
+	    }
+	    
+	    private static void clearDatabase() {
+	        System.out.print("Are you sure you want to delete all saved foods? (Y/N): ");
+	        String confirm = scanner.nextLine();
+
+	        if (confirm.equalsIgnoreCase("Y")) {
+	            foodDatabase.clear();  // clears all entries in memory
+
+	            
+	            try (PrintWriter writer = new PrintWriter(new FileWriter(DATABASE_FILE))) {
+	                
+	            } catch (IOException e) {
+	                System.out.println("Error clearing database file: " + e.getMessage());
+	            }
+
+	            System.out.println("Database cleared successfully.");
+	        } else {
+	            System.out.println("Clear operation canceled.");
+	        }
 	    }
 	}
 		
