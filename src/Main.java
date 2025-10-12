@@ -175,15 +175,25 @@ public class Main {
 		System.out.println("___ Daily Summary ___");
 		int totalCalories = 0;
 		double totalProtein = 0.0;
+		int totalFat = 0;
+		int totalCarbs = 0;
+		int totalSodium = 0;
 		
 		for (Food food : dailyLog) {
 			System.out.println(food);
 			totalCalories += food.calories;
 			totalProtein += food.protein;
+			totalFat += food.fat;
+			totalCarbs += food.carbs;
+			totalSodium += food.sodium;
 		}
 		
-		System.out.println("\nTotal calories: " + totalCalories);
-        System.out.println("Total protein: " + totalProtein + "g");
+		System.out.println("\nTotal Calories: " + totalCalories + " calories");
+        System.out.println("Total Protein: " + totalProtein + "g");
+        System.out.println("Total Fat: " + totalFat + "g");
+        System.out.println("Total Carbs: " + totalCarbs + "g");
+        System.out.println("Total Sodium: " + totalSodium + "mg");
+        
 	}
 
 }
