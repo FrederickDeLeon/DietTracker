@@ -111,7 +111,7 @@ public class DietTracker {
         }
 	}
 	
-	// Utility Methods
+	//Utility Methods
 	
 	 private static Food createFoodEntry(String name) {
 	        if (name.equalsIgnoreCase("back")) return null;
@@ -229,6 +229,47 @@ public class DietTracker {
 	        } else {
 	            System.out.println("Clear operation canceled.");
 	        }
+	    }
+	    
+	    //Getter Methods for Swing UI
+	    
+	    public HashMap<String, Food> getFoodDatabase() {
+	        return foodDatabase;
+	    }
+
+	    public ArrayList<Food> getDailyLog() {
+	        return dailyLog;
+	    }
+	    
+	    public String getDailySummary() {
+	        StringBuilder sb = new StringBuilder();
+	        int totalCalories = 0, totalFat = 0, totalCarbs = 0, totalSodium = 0;
+	        double totalProtein = 0.0;
+
+	        for (Food f : dailyLog) {
+	            sb.append(f).append("\n");
+	            totalCalories += f.calories;
+	            totalProtein += f.protein;
+	            totalFat += f.fat;
+	            totalCarbs += f.carbs;
+	            totalSodium += f.sodium;
+	        }
+
+	        sb.append("\nTotal Calories: ").append(totalCalories);
+	        sb.append("\nTotal Protein: ").append(String.format("%.1f g", totalProtein));
+	        sb.append("\nTotal Fat: ").append(totalFat).append(" g");
+	        sb.append("\nTotal Carbs: ").append(totalCarbs).append(" g");
+	        sb.append("\nTotal Sodium: ").append(totalSodium).append(" mg\n");
+
+	        return sb.toString();
+	    }
+	    
+	    public Food addFood(String name) {
+	        Food food = createFoodEntry(name);
+	        if (food != null) {
+	            foodDatabase.put(food.foodName.toLowerCase(), food);
+	        }
+	        return food;
 	    }
     
 
