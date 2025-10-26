@@ -1,6 +1,6 @@
 # DietTracker - GUI Prototype
 
-**Branch Notice:** This branch contains an in-development Swing GUI interface for the DietTracker application. It is a work-in-progress and not yet feature-complete with the stable console version on the `main` branch.
+**Branch Notice:** This branch contains an in-development Swing GUI for the DietTracker application. It's a work-in-progress and not yet feature-complete. The stable console version is on the `main` branch.
 
 A Java application for tracking daily nutritional intake with intelligent data persistence. The system maintains a searchable food database to eliminate redundant data entry and provides daily nutritional summaries.
 
