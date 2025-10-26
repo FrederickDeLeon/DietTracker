@@ -50,7 +50,8 @@ public class DietTracker {
 			System.out.println("║ 2. Look up food        ║");
 			System.out.println("║ 3. Show all foods      ║");
 			System.out.println("║ 4. Clear database      ║");
-			System.out.println("║ 5. Go back             ║");
+			System.out.println("║ 5. Edit database       ║");
+			System.out.println("║ 6. Back                ║");
 			System.out.println("╚════════════════════════╝");
             String response = scanner.nextLine();
 
@@ -59,7 +60,8 @@ public class DietTracker {
                 case "2" -> lookupFood();
                 case "3" -> showAllFoods();
                 case "4" -> clearDatabase();
-                case "5" -> { return; }
+                case "5" -> editDatabase();
+                case "6" -> { return; }
                 default -> System.out.println("Invalid choice.");
             }
         }
@@ -226,9 +228,83 @@ public class DietTracker {
 	            }
 
 	            System.out.println("Database cleared successfully.");
-	        } else {
+	        } 
+	        else {
 	            System.out.println("Clear operation canceled.");
 	        }
+	    }
+	    
+	    private static void editDatabase() {
+	    	String lookup = prompt("Enter food name to edit:");
+	        Food found = foodDatabase.get(lookup.toLowerCase());
+	        
+	        if (found == null) {
+	            System.out.println("Food not found.");
+	            return;
+	        }
+	        
+	        System.out.println("╔════════════════════════╗");
+	        System.out.println("║ Please select data to  ║");
+	        System.out.println("║ modify:                ║");
+	        System.out.println("║                        ║");
+			System.out.println("║ 1. Calories            ║");
+			System.out.println("║ 2. Protein             ║");
+			System.out.println("║ 3. Fat                 ║");
+			System.out.println("║ 4. Carbs               ║");
+			System.out.println("║ 5. Sodium              ║");
+			System.out.println("║ 6. All data            ║");
+			System.out.println("║ 7. Back                ║");
+			System.out.println("║                        ║");
+			System.out.println("╚════════════════════════╝");
+            String response = scanner.nextLine();
+
+            switch (response) {
+                case "1" -> {
+                	int newCalories = getInt("Calories");
+                	found.calories = newCalories;
+                	System.out.println("Calories updated."); 
+                }
+                case "2" -> {
+                	double newProtein = getDouble("Protein");
+                	found.protein = newProtein;
+                	System.out.println("Protein updated");
+                }
+                case "3" -> {
+                	int newFat = getInt("Fat");
+                	found.fat = newFat;
+                	System.out.println("Fat updated.");
+                }
+                case "4" -> {
+                	int newCarbs = getInt("Carbs");
+                	found.carbs = newCarbs;
+                	System.out.println("Carbs updated.");
+                }
+                case "5" -> {
+                	int newSodium = getInt("Sodium");
+                	found.sodium = newSodium;
+                	System.out.println("Sodium updated.");
+                }
+                case "6" -> {
+                	int newCalories = getInt("Calories");
+                	found.calories = newCalories;
+                	
+                	double newProtein = getDouble("Protein");
+                	found.protein = newProtein;
+                
+                	int newFat = getInt("Fat");
+                	found.fat = newFat;
+                
+                	int newCarbs = getInt("Carbs");
+                	found.carbs = newCarbs;
+                	
+                	int newSodium = getInt("Sodium");
+                	found.sodium = newSodium;
+                	System.out.println("All values updated.");
+                }
+                case "7" -> { return; }
+                default -> System.out.println("Invalid choice.");
+            }
+	        
 	    }
 	    
 	    //Getter Methods for Swing UI
