@@ -260,51 +260,58 @@ public class DietTracker {
 
             switch (response) {
                 case "1" -> {
-                	int newCalories = getInt("Calories");
-                	found.calories = newCalories;
+                	updateFood(found, "calories");
                 	System.out.println("Calories updated."); 
                 }
                 case "2" -> {
-                	double newProtein = getDouble("Protein");
-                	found.protein = newProtein;
+                	updateFood(found, "protein");
                 	System.out.println("Protein updated");
                 }
                 case "3" -> {
-                	int newFat = getInt("Fat");
-                	found.fat = newFat;
+                	updateFood(found, "fat");
                 	System.out.println("Fat updated.");
                 }
                 case "4" -> {
-                	int newCarbs = getInt("Carbs");
-                	found.carbs = newCarbs;
+                	updateFood(found, "carbs");
                 	System.out.println("Carbs updated.");
                 }
                 case "5" -> {
-                	int newSodium = getInt("Sodium");
-                	found.sodium = newSodium;
+                	updateFood(found, "sodium");
                 	System.out.println("Sodium updated.");
                 }
                 case "6" -> {
-                	int newCalories = getInt("Calories");
-                	found.calories = newCalories;
-                	
-                	double newProtein = getDouble("Protein");
-                	found.protein = newProtein;
-                
-                	int newFat = getInt("Fat");
-                	found.fat = newFat;
-                
-                	int newCarbs = getInt("Carbs");
-                	found.carbs = newCarbs;
-                	
-                	int newSodium = getInt("Sodium");
-                	found.sodium = newSodium;
+                	updateFood(found, "calories");
+                	updateFood(found, "protein");
+                	updateFood(found, "fat");
+                	updateFood(found, "carbs");
+                	updateFood(found, "sodium");
                 	System.out.println("All values updated.");
                 }
                 case "7" -> { return; }
                 default -> System.out.println("Invalid choice.");
             }
 	        
+	    }
+	    
+	    private static void updateFood(Food food, String fieldName) {
+	    	switch (fieldName.toLowerCase()) {
+		    	case "calories":
+		    		food.calories = getInt("Calories");
+		    		break;
+		    	case "protein":
+		    		food.protein = getDouble("Protein");
+		    		break;
+		    	case "fat":
+		    		food.fat = getInt("Fat");
+		    		break;
+		    	case "carbs":
+		    		food.carbs = getInt("Carbs");
+		    		break;
+		    	case "sodium":
+		    		food.sodium = getInt("Sodium");
+		    		break;
+	    	}
+	    	
 	    }
 	    
 	    //Getter Methods for Swing UI
