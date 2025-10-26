@@ -1,2 +1,12 @@
 # DietTracker
-This is a fun little project I made to practice coding in Java. The main goal of it is to track the calories and protein of food the user enters into the program and then sum it all together and return it. I want to eventually expand the features of this program to include a database of sorts based on the information gathered from the user's food entries, as well as keeping track of more nutritional information such as fat, carbs, and sodium content. This database could be used so that the program can refer to it without needing to ask the user for information on the entered food's calorie count or protein content. 
+ 
+A Java application for tracking daily nutritional intake with intelligent data persistence. The system maintains a searchable food database to eliminate redundant data entry and provides daily nutritional summaries.
+
+## Core Features:
+
+* **Persistent Food Database**: Automatically saves nutritional data to file storage, maintaining all food information between application sessions
+* **Database Management**: View all saved foods or completely clear the database as needed
+* **Daily Log**: Tracks daily food consumption and calculates total nutritional values
+* **Smart Entry**: Automatically checks new entries against the existing database and prompts users to save new foods for future use
+* **Efficient Workflow**: Reduces repetitive data input by recalling previously saved food information
+
